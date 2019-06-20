@@ -229,7 +229,7 @@ interface Action{
     public void listen();
     public void look(String r);
     public void choose(String r) throws LoosedException;
-    public void search(String name);
+    public void search(String name,String hadaf);
     //public void examining();
     public void fire(String name,String hadaf);
     public void specialact(String pers,String acto,String hadaf);
@@ -245,11 +245,21 @@ class Story implements Action{
     int thisRoomNum = 0;
     boolean endGame = false;
     String gameParStory;
+    Person[] table_characters;
+    Room[] table_gameRooms;
 
     public Story(GameDATA a) {
         storyData = a;
         characters = storyData.charData;
+        table_characters=characters.clone();
         gameRooms = storyData.roomData;
+        table_gameRooms=gameRooms.clone();
+        /*Things [] table_things;
+        for (int i = 0; i <table_gameRooms.length ; i++) {
+            table_things=gameRooms[i].arr;
+            table_gameRooms[i].arr=table_things;
+            table_things=null;
+        }*/
     }
 
     public static void gameHelp() {
@@ -327,6 +337,9 @@ class Story implements Action{
                 case  "PICK":
                     pick(s.getObject());
                     break;
+                case "UNDO":
+                    undo();
+                    break;
                 default:
                     System.out.println(">I can't understand what do you mean!");
             }
@@ -345,7 +358,7 @@ class Story implements Action{
                 fire(pers,hadaf);
                 break;
             case "SEARCH":
-                search(pers);
+                search(pers,hadaf);
                 break;
                     /*case "EXAMINE":
                         examining(characters[i]);
@@ -361,6 +374,7 @@ class Story implements Action{
     }
 
     public void move(String r) {
+        save();
         int i;
         for (i = 0; i < storyData.roomNum; i++) {
             if (r.equals(gameRooms[i].name) == true) {
@@ -401,7 +415,7 @@ class Story implements Action{
         for (int i = 0; i < characters.length ; i++) {
             //System.out.println("This is:"+characters[i].charName);
             if(characters[i]!=null){
-                System.out.println(characters[i].charName);
+                //System.out.println(characters[i].charName);
                 if (characters[i].charName.equals(who)){
                     ((Person)characters[i]).ask(about);
                     return;
@@ -412,12 +426,16 @@ class Story implements Action{
     }
 
     public void pick(String name) {
+        save();
         for (int i = 0; i < gameRooms[thisRoomNum].arr.length; i++) {
             if(gameRooms[thisRoomNum].arr[i]!=null){
                 if (gameRooms[thisRoomNum].arr[i].name.equals(name)) {
                     if (gameRooms[thisRoomNum].arr[i].pickable) {
                         pocket.add(name);
                         gameRooms[thisRoomNum].arr[i] = null;
+                        //
+                        System.out.println(table_gameRooms[thisRoomNum].arr[i].name);
+                        //
                         System.out.println(">successfully picked ");
                     } else {
                         System.out.println(">This thing is not pickable!");
@@ -452,6 +470,7 @@ class Story implements Action{
     }*/
 
     public void fire(String name,String hadaf) {
+        save();
         FatherPerson p=null;
         boolean flag=false;
         for (int i = 0; i < characters.length; i++) {
@@ -491,7 +510,7 @@ class Story implements Action{
         }
     }*/
 
-    public void search(String name) {
+    public void search(String name,String hadaf) {
         FatherPerson p=null;
         boolean flag=false;
         //System.out.println(characters.length);
@@ -507,7 +526,7 @@ class Story implements Action{
         }
         if (flag){
             if (p instanceof Assistant) {
-                ((Assistant)p).search(gameRooms[thisRoomNum].arr,characters);
+                ((Assistant)p).search(gameRooms[thisRoomNum].arr,characters,hadaf);
             }
 
             else {
@@ -521,6 +540,139 @@ class Story implements Action{
         }
 
     }
+
+
+    public void save(){
+        File f=new File("src//save.txt");
+        try{
+            f.createNewFile();
+            FileWriter fr=new FileWriter(f,true);
+            fr.write("***\n");
+            fr.write((char)(thisRoomNum+48));
+            fr.write("\n");
+            for (int i = 0; i <gameRooms.length ; i++) {
+                fr.write((char)(i+48));
+                fr.write("\n");
+                for (int j = 0; j <gameRooms[i].arr.length ; j++) {
+                    if (gameRooms[i].arr[j]==null){fr.write("null");}
+                    else{fr.write(gameRooms[i].arr[j].name);}
+                    fr.write(" ");
+                }
+                fr.write("\n");
+            }
+            fr.write("characters\n");
+            for (int i = 0; i <characters.length ; i++) {
+                if (characters[i]==null){fr.write("null");}
+                else {fr.write(characters[i].charName);}
+                fr.write(" ");
+            }
+            fr.write("\npocket\n");
+            if (pocket.size()!=0) {
+                for (int i = 0; i < pocket.size(); i++) {
+                    fr.write(pocket.get(i));
+                    fr.write(" ");
+                }
+            }
+            else {fr.write("null");}
+            fr.write("\n");
+            fr.flush();
+            fr.close();
+        }catch (IOException e){
+            e.getMessage();
+        }
+    }
+    public void undo(){
+        //save();
+        int countline=0,undoline=0;
+        File f=new File("src//save.txt");
+        try{
+            String [] starr;
+            Scanner s=new Scanner(f);
+            while (s.hasNext()){
+                countline++;
+                if(s.nextLine().equals("***")){
+                    undoline=countline;
+                }
+            }
+            s=new Scanner(f);
+            countline=0;
+            while (countline!=undoline){
+                s.nextLine();
+                countline++;
+            }
+            thisRoomNum=Integer.parseInt(s.nextLine());
+            Room[] tempgamerooms=table_gameRooms.clone();
+            for (int i = 0; i < gameRooms.length; i++) {
+                s.nextLine();
+                starr=s.nextLine().split(" ");
+                for (int j = 0; j <gameRooms[i].arr.length ; j++) {
+                    if (starr[j].equals("null")){gameRooms[i].arr[j]=null;}
+                    else{gameRooms[i].arr[j]=tempgamerooms[i].arr[j];}
+                }
+            }
+            tempgamerooms=null;
+            Person[] tempcharecter=table_characters.clone();
+            s.nextLine();
+            starr = s.nextLine().split(" ");
+            for (int j = 0; j <characters.length ; j++) {
+                if (starr[j].equals("null")) {characters[j]=null;}
+                else {characters[j]=tempcharecter[j];}
+            }
+            tempcharecter=null;
+            s.nextLine();
+            starr=s.nextLine().split(" ");
+            if (!starr[0].equals("null")){
+                if (starr.length!=pocket.size()){
+                    for (int i = 0; i <table_gameRooms.length ; i++) {
+                        for (int j = 0; j <table_gameRooms[i].arr.length ; j++) {
+                            if (table_gameRooms[i].arr[j].name.equals(pocket.get(pocket.size()-1))){
+                                Things []tempthing=table_gameRooms[i].arr.clone();
+                                gameRooms[i].arr[j]=tempthing[j];
+                                tempthing=null;
+                                pocket.remove(pocket.size()-1);
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if (pocket.size()!=0){
+                    for (int i = 0; i <table_gameRooms.length ; i++) {
+                        for (int j = 0; j <table_gameRooms[i].arr.length ; j++) {
+                            System.out.println(table_gameRooms[i].arr[j].name);
+                            if (table_gameRooms[i].arr[j].name.equals(pocket.get(pocket.size()-1))){
+                                Things []tempthing=table_gameRooms[i].arr.clone();
+                                gameRooms[i].arr[j]=tempthing[j];
+                                tempthing=null;
+                                pocket.remove(pocket.size()-1);
+                            }
+                        }
+                    }
+                }
+            }
+            s=new Scanner(f);
+            File temp =new File("src//temp.txt");
+            temp.createNewFile();
+            FileWriter fr=new FileWriter(temp);
+            countline=0;
+            while (countline!=undoline-1){
+                countline++;
+                fr.write(s.nextLine());
+                fr.write("\n");
+            }
+            fr.close();
+            fr=new FileWriter(f);
+            s=new Scanner(temp);
+            while (s.hasNext()){
+                fr.write(s.nextLine());
+                fr.write("\n");
+            }
+            fr.close();
+
+        }catch (IOException e){e.printStackTrace();}
+        System.out.println("> undo done");
+    }
+
 }
 abstract class FatherPerson{
     private int fingerprint;
@@ -570,15 +722,17 @@ class PoliceOfficer extends Person{
 }
 class Assistant extends  Person{
 
-    public void search(Things []a, FatherPerson []b)
+    public void search(Things []a, FatherPerson []b,String thing)
     {
-        System.out.println(">What thing do you want to search?");
-        Scanner sc=new Scanner(System.in);
-        String thing=sc.next();
+//        System.out.println(">What thing do you want to search?");
+//        Scanner sc=new Scanner(System.in);
+//        String thing=sc.next();
         for (int i = 0; i < a.length; i++) {
-            if(a[i].name.toLowerCase().equals(thing.toLowerCase())){
-                a[i].printfinger(b);
-                return;
+            if(a[i]!=null) {
+                if (a[i].name.toLowerCase().equals(thing.toLowerCase())) {
+                    a[i].printfinger(b);
+                    return;
+                }
             }
         }
         System.out.println(">We don't have this thing in this Room!");
@@ -708,7 +862,10 @@ class MiniGame{
         return 0;
     }
 }
-class Things{
+class Things implements Cloneable{
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
     String name;
     boolean pickable;
     String describtion;
@@ -1060,7 +1217,7 @@ class smartScanner{
                 index=-1;
                 for (int i = 0; i < peoplenames.length; i++) {
                     if(peoplenames[i]!=null) {
-                        if ((text.contains("ask " + (peoplenames[i].toLowerCase()))) || (text.contains("from " + (peoplenames[i].toLowerCase())))) {
+                        if (text.contains(peoplenames[i].toLowerCase())) {
                             index = i;
                         }
                     }
@@ -1092,7 +1249,7 @@ class smartScanner{
                 index2=-1;
                 for (int i = 0; i < thingsnames.length; i++) {
                     if (thingsnames[i]!=null) {
-                        if (text.contains("about " + (thingsnames[i].toLowerCase()))) {
+                        if (text.contains((thingsnames[i].toLowerCase()))) {
                             index2 = i;
                         }
                     }
@@ -1101,7 +1258,7 @@ class smartScanner{
                     this.object2 = thingsnames[index2];
                 }
                 while(index2==-1){
-                    System.out.println("I can't understand what do you want to search");
+                    System.out.println("Tell me what do you want to search");
                     System.out.println("Enter his name or enter \"giveup\" to return to top:" );
                     String retry=s.nextLine();
                     if (retry.contains("give")&&(retry.contains("up"))){
@@ -1155,6 +1312,11 @@ class smartScanner{
                     }
                 }
             }
+            //
+            else if(text.contains("undo")){
+                this.action="UNDO";
+            }
+            //
             else{
                 System.out.println("I can't understand what do you want to do.");
                 System.out.println("Enter your command again:");
