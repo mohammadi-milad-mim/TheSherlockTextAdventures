@@ -1,6 +1,8 @@
 //for git test
 import java.io.*;
 import java.util.*;
+
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -188,7 +190,7 @@ class GameDATA
         this.setChars();
         this.setRooms();
     }
-    public GameData(JSONObject js){
+    public GameDATA(JSONObject js){
         personCharNum=(int)js.get("personCharNum");
         System.out.println(personCharNum);
 
