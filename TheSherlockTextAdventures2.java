@@ -1,14 +1,23 @@
 //for git test
 import java.io.*;
 import java.util.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 //    AmirHossein Safdarian:    973613038
 //         Millad Muhammadi:    973613073
 //AmirAli Abdorrazaghnezhad:    973613045
 public class TheSherlockTextAdventures2 {
     //an other git test
-    // intelliJ git test
+    //intelliJ git test
+
     public static void main(String[] args) throws FileNotFoundException {
+        JSONParser parser = new JSONParser();
+        Reader reader = new FileReader("gameData.json");
+        Object jsonObj = parser.parse(reader);
+        JSONObject jsonObject = (JSONObject) jsonObj;
         boolean loosed = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello :)");
@@ -58,6 +67,9 @@ public class TheSherlockTextAdventures2 {
         }while (fileAddress==" ");*/
         GameDATA aData = new GameDATA(fileAddress);
         Story str=new Story(aData);
+        GameDATA jData = new GameDATA(jsonObject);
+        Story jStr = new Story(jData);
+        System.out.println("It was JSON test!");
         System.out.println("This is the story...");
         str.gameStory();
         System.out.println("This is the story map...");
@@ -138,6 +150,7 @@ class LoosedException extends Exception{
 }
 class GameDATA
 {
+
     Person []charData;
     Room []roomData;
     int personCharNum, roomNum, thingsNum,assisCharNum, policeCharNum,fullCharNum;
@@ -145,6 +158,7 @@ class GameDATA
     String fileAddress;
     public GameDATA(String a) throws FileNotFoundException
     {
+
         d=new Scanner(new File(a));
         personCharNum=d.nextInt();
         d.nextLine();
@@ -173,6 +187,12 @@ class GameDATA
 
         this.setChars();
         this.setRooms();
+    }
+    public GameData(JSONObject js){
+        personCharNum=(int)js.get("personCharNum");
+        System.out.println(personCharNum);
+
+
     }
     public void setChars()
     {
