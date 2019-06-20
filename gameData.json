@@ -1,0 +1,292 @@
+{
+    "charData": [
+        {
+          "charName": "Sahand",
+          "charDescreption": "Parham's friend.",
+          "murder": false,
+          "charAnswer": [
+            [
+                "Sahand",
+                "Chef",
+                "Gardener",
+                "NeighbourLeft",
+                "Lestrade",
+                "Watson"
+            ],
+            [
+                "I am his old friend.",
+                "I don't like him.",
+                "He is a hardworking man.",
+                "He is a quite man.",
+                "I don't know him.",
+                "I don't trust police.",
+                "He is a trustworthy man."
+            ]
+        ]
+    },
+        {
+            "charName": "Chef",
+            "charDescreption": "His private chef.",
+            "murder": true,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "Money can make us do anything.",
+                    "I just know how to cook.",
+                    "He is realy cold and becomes angry very fast.",
+                    "He is very close to Parham and he has the keys.",
+                    "I think there is a reason that he has moved here.",
+                    "I believe the police.",
+                    "He is so unprofessional."
+                ]
+            ]
+        },
+        {
+            "charName": "Gardener",
+            "charDescreption": "His private gardener.",
+            "murder": false,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "We can always trust our old friends.",
+                    "He is very young.",
+                    "Why should I have killed him?",
+                    "I am his gardener too he is a good man.",
+                    "His garden is messy.",
+                    "I never lie to police.",
+                    "All of us need a good assistant."
+                ]
+            ]
+        },
+        {
+            "charName": "NeighbourLeft",
+            "charDescreption": "His old neighbour.",
+            "murder": false,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "We always drink together on fridays but not the last friday.",
+                    "He was always called the short chef.",
+                    "I know him very well he has been working for Parham since 10 years ago.",
+                    "I have been Parham's neighbour for 15 years.",
+                    "He is the worst neighbour in this street he is killing us with the sound of his house construction everyday.",
+                    "Police is always late just when the criminal is complete.",
+                    "He is smart."
+                ]
+            ]
+        },
+        {
+            "charName": "NeighbourRight",
+            "charDescreption": "His new neighbour.",
+            "murder": false,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "He comes to Parham's house almost everyday!",
+                    "Wow! I didn't know that Parham has a chef.",
+                    "I don't know him but he seems to be a very kind person.",
+                    "I hate him he thinks that he owns the whole street and he always parks his car in front of my house.",
+                    "I am his new neighbour and I dont know him very well.",
+                    "Just brings peace to this neighbourhood.",
+                    "I am a fan of you two."
+                ]
+            ]
+        },
+        {
+            "charName": "Lestrade",
+            "charDescreption": "The policeman.",
+            "murder": false,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "Everything is against him he is the murderer.",
+                    "He is just a simple chef.",
+                    "I think the murderer tried to show that the gardener is the murderer.",
+                    "He seems to be an old friend.",
+                    "I think he is the murderer.",
+                    "Always trust the police.",
+                    "I cant understand what does watson is doing here."
+                ]
+            ]
+        },
+        {
+            "charName": "Watson",
+            "charDescreption": "Your Best Friend.",
+            "murder": false,
+            "charAnswer": [
+                [
+                    "Sahand",
+                    "Chef",
+                    "Gardener",
+                    "NeighbourLeft",
+                    "Lestrade",
+                    "Watson"
+                ],
+                [
+                    "He can be the murderer but his friendship is too deep.",
+                    "He droped of from CE in University of Isfahan.",
+                    "The left neighbour says that the gardener has been working here for 10 years.",
+                    "He knows sahand very well but we can't trust him.",
+                    "He is new but no reason to be murderer.",
+                    "Lestrade just makes us slow.",
+                    "The decision is up to you sherlock."
+                ]
+            ]
+        }
+      ],
+      "roomData": [
+        {
+          "name": "Garden",
+          "voice": "Neighbours argueing sound.",
+          "thingsNum": 3,
+          "arr":[
+              {
+                  "name":"ParhamBody",
+                  "describtion":"Very Bloody.",
+                  "pickable":false,
+                  "finum":2,
+                  "finarr":[0,4]
+              },
+              {
+                "name":"Warehouse",
+                "describtion":"The Locker is broken.",
+                "pickable":false,
+                "finum":2,
+                "finarr":[1,2]
+            },
+            {
+                "name":"GardenersKnife",
+                "describtion":"Very sharp and new.",
+                "pickable":true,
+                "finum":1,
+                "finarr":[2]
+            }
+          ]
+        },
+        {
+            "name": "Hall",
+            "voice": "Television and radio sound.",
+            "thingsNum": 2,
+            "arr":[
+                {
+                    "name":"Sofa",
+                    "describtion":"Sahands wallet on it.",
+                    "pickable":false,
+                    "finum":1,
+                    "finarr":[0]
+                },
+                {
+                  "name":"Television",
+                  "describtion":"Breaking News:Increasing Sahands Networth.",
+                  "pickable":false,
+                  "finum":1,
+                  "finarr":[2]
+              }
+            ]
+          },
+          {
+            "name": "Kitchen",
+            "voice": "Oven sound.",
+            "thingsNum": 1,
+            "arr":[
+                {
+                    "name":"Refrigerator",
+                    "describtion":"Drops of blood.",
+                    "pickable":false,
+                    "finum":4,
+                    "finarr":[0,1,2,6]
+                }
+            ]
+          },
+          {
+            "name": "SleepRoom",
+            "voice": "Nothing special.",
+            "thingsNum": 2,
+            "arr":[
+                {
+                    "name":"Photo",
+                    "describtion":"Photo of Parham and his old neighbour.",
+                    "pickable":true,
+                    "finum":1,
+                    "finarr":[4]
+                },
+                {
+                  "name":"Letter",
+                  "describtion":"Farewell to Sahand.",
+                  "pickable":true,
+                  "finum":1,
+                  "finarr":[1]
+              }
+            ]
+          },
+          {
+            "name": "WorkRoom",
+            "voice": "Printer Sound.",
+            "thingsNum": 2,
+            "arr":[
+                {
+                    "name":"Laptop",
+                    "describtion":"It's broken.",
+                    "pickable":false,
+                    "finum":2,
+                    "finarr":[0,1]
+                },
+                {
+                  "name":"Document",
+                  "describtion":"His company documents.",
+                  "pickable":true,
+                  "finum":1,
+                  "finarr":[0]
+              },
+              {
+                  "name":"ParhamBody",
+                  "describtion":"",
+                  "pickable":false,
+                  "finum":2,
+                  "finarr":[0,4]
+              }
+            ]
+          }
+      ],
+    "personCharNum": 5,
+    "assisCharNum": 1,
+    "policeCharNum": 1,
+    "roomNum": 5
+}
+
+        
