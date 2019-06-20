@@ -252,7 +252,13 @@ class Story implements Action{
         storyData = a;
         characters = storyData.charData;
         table_characters=characters.clone();
-        gameRooms = storyData.roomData;
+        Room[] temp = new Room[(storyData.roomNum)+1];
+        for (int i = 0; i < storyData.roomNum; i++) {
+            temp[i]=storyData.roomData[i];
+        }
+        temp[storyData.roomNum]=new SpecialRoom();
+        temp[storyData.roomNum].name="SecretRoom";
+        gameRooms = temp;
         table_gameRooms=gameRooms.clone();
         /*Things [] table_things;
         for (int i = 0; i <table_gameRooms.length ; i++) {
@@ -376,13 +382,32 @@ class Story implements Action{
     public void move(String r) {
         save();
         int i;
+        int temp = thisRoomNum;
         for (i = 0; i < storyData.roomNum; i++) {
             if (r.equals(gameRooms[i].name) == true) {
                 thisRoomNum = i;
                 break;
             }
         }
-        System.out.println(">Now you are at:  " + gameRooms[i].name);
+        if (gameRooms[i] instanceof SpecialRoom) {
+            int scores = ((SpecialRoom)gameRooms[i]).game.hadsadad();
+            if(scores!=0){
+                System.out.println("You won the game with score: "+ scores);
+                System.out.println(">You are still at:  " + gameRooms[i].name);
+
+
+            }
+            else{
+                thisRoomNum=temp;
+                System.out.println(">You are still at:  " + gameRooms[thisRoomNum].name);
+
+            }
+        }
+        else
+        {
+            System.out.println(">Now you are at:  " + gameRooms[i].name);
+
+        }
 
     }
 
@@ -434,7 +459,7 @@ class Story implements Action{
                         pocket.add(name);
                         gameRooms[thisRoomNum].arr[i] = null;
                         //
-                        System.out.println(table_gameRooms[thisRoomNum].arr[i].name);
+                        //System.out.println(table_gameRooms[thisRoomNum].arr[i].name);
                         //
                         System.out.println(">successfully picked ");
                     } else {
@@ -788,6 +813,7 @@ class Room extends FatherRoom{
 class SpecialRoom extends Room{
     boolean locked;
     boolean dark;
+    MiniGame game = new MiniGame();
 }
 class timeThread extends Thread{
     @Override
@@ -810,7 +836,7 @@ class MiniGame{
     static class stopper{
         static int a=10;
     }
-    public static int hadsadad(){
+    public  int hadsadad(){
         timeThread th=new timeThread();
         Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler(){
             public void uncaughtException(Thread th, Throwable ex) {
