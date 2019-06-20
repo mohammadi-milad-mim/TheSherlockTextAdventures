@@ -7,6 +7,7 @@ import java.util.*;
 //AmirAli Abdorrazaghnezhad:    973613045
 public class TheSherlockTextAdventures2 {
     //an other git test
+    // intelliJ git test
     public static void main(String[] args) throws FileNotFoundException {
         boolean loosed = false;
         Scanner sc = new Scanner(System.in);
