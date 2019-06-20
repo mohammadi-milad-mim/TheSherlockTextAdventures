@@ -1,0 +1,145 @@
+5
+1
+1
+5
+Sahand
+Parham's friend.
+false
+Chef
+His private chef.
+true
+Gardener
+His private gardener.
+false
+NeighbourLeft
+His old neighbour.
+false
+NeighbourRight
+His new neighbour.
+false
+Lestrade
+The policeman.
+false
+Watson
+Your Best Friend.
+false
+I am his old friend.
+I don't like him.
+He is a hardworking man.
+He is a quite man.
+I don't know him.
+I don't trust police.
+He is a trustworthy man.
+Money can make us do anything.
+I just know how to cook.
+He is realy cold and becomes angry very fast.
+He is very close to Parham and he has the keys.
+I think there is a reason that he has moved here.
+I believe the police.
+He is so unprofessional.
+We can always trust our old friends.
+He is very young.
+Why should I have killed him?.
+I am his gardener too he is a good man.
+His garden is messy.
+I never lie to police.
+All of us need a good assistant.
+We always drink together on fridays but not the last friday.
+He was always called the short chef.
+I know him very well he has been working for Parham since 10 years ago.
+I have been Parham's neighbour for 15 years.
+He is the worst neighbour in this street he is killing us with the sound of his house construction everyday.
+Police is always late just when the criminal is complete.
+He is smart.
+He comes to Parham's house almost everyday!
+Wow! I didn't know that Parham has a chef.
+I don't know him but he seems to be a very kind person.
+I hate him he thinks that he owns the whole street and he always parks his car in front of my house.
+I am his new neighbour and I dont know him very well.
+Just brings peace to this neighbourhood.
+I am a fan of you two.
+Everything is against him he is the murderer.
+He is just a simple chef.
+I think the murderer tried to show that the gardener is the murderer.
+He seems to be an old friend.
+I think he is the murderer.
+Always trust the police.
+I cant understand what does watson is doing here.
+He can be the murderer but his friendship is too deep.
+He droped of from CE in University of Isfahan.
+The left neighbour says that the gardener has been working here for 10 years.
+He knows sahand very well but we can't trust him.
+He is new but no reason to be murderer.
+Lestrade just makes us slow.
+The decision is up to you sherlock.
+Garden
+Neighbours argueing sound.
+3
+ParhamBody
+Very Bloody.
+false
+2
+0
+4
+GardenersKnife
+Very sharp and new.
+true
+1
+2
+Warehouse
+The Locker is broken.
+false
+2
+1
+2
+Hall
+Television and radio sound.
+2
+Sofa
+Sahands wallet on it.
+false
+1
+0
+Television
+Breaking News:Increasing Sahands Networth.
+false
+1
+2
+Kitchen
+Oven sound.
+1
+Refrigerator
+Drops of blood.
+false
+4
+0
+1
+2
+6
+SleepRoom
+Nothing special.
+2
+Photo
+Photo of Parham and his old neighbour.
+true
+1
+4
+Letter
+Farewell to Sahand.
+true
+1
+1
+WorkRoom
+Printer Sound.
+2
+Laptop
+It's broken.
+false
+2
+0
+1
+Document
+His company documents.
+true
+1
+0

@@ -5,7 +5,7 @@ import java.util.*;
 //    AmirHossein Safdarian:    973613038
 //         Millad Muhammadi:    973613073
 //AmirAli Abdorrazaghnezhad:    973613045
-public class TheSherlockTextAdventures {
+public class TheSherlockTextAdventures2 {
     //an other git test
     public static void main(String[] args) throws FileNotFoundException {
         boolean loosed = false;
